@@ -1,7 +1,7 @@
 # sozu proxy simple demo config file
 
-command_socket = "./command_folder/sock"
-saved_state    = "./state.json"
+command_socket = "/demo/command_folder/sock"
+saved_state    = "/demo/state.json"
 log_level      = "info"
 log_target     = "stdout"
 command_buffer_size = 16384
@@ -10,23 +10,23 @@ handle_process_affinity = false
 
 # you need this, but currently it`s not used
 [metrics]
-address = "192.168.59.103"
+address = "172.20.0.99"
 port = 8125
 
 [http]
-address = "192.168.1.99"
+address = "172.20.0.99"
 max_connections = 20
 port = 8080
 buffer_size = 16384
-answer_404 = "./404.html"
-answer_503 = "./503.html"
+answer_404 = "/demo/404.html"
+answer_503 = "/demo/503.html"
 
 [applications]
 
 [applications.webapp]
 hostname = "sozu.local"
 frontends = [ "HTTP" ] # list of proxy tags
-backends  = [ "192.168.1.21:8080", "192.168.1.22:8080", "192.168.1.23:8080"] # list of IP/port 
+backends  = [ "172.20.0.11:8080", "172.20.0.12:8080", "172.20.0.13:8080"] # list of IP/port 
 
 
 
