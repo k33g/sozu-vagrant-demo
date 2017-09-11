@@ -1,0 +1,60 @@
+version: "2"
+
+services:
+  sozu:
+    image: clevercloud/sozu
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.99
+    volumes:
+      - ./sozu-project/:/demo/
+    extra_hosts:
+       sozu.local: 172.20.0.99
+    command: /sozu start -c /demo/demo.toml
+
+  webapp1:
+    build: hello-earth-v1
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.11
+
+  webapp2:
+    build: hello-earth-v1
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.12
+
+  webapp3:
+    build: hello-earth-v1
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.13
+
+  webapp_new_1:
+    build: hello-earth-v2
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.21
+
+  webapp_new_2:
+    build: hello-earth-v2
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.22
+
+  webapp_new_3:
+    build: hello-earth-v2
+    networks:
+      sozu_net:
+        ipv4_address: 172.20.0.23
+
+
+networks:
+  sozu_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+       - subnet: 172.20.0.0/16
+         gateway: 172.20.0.1
+
